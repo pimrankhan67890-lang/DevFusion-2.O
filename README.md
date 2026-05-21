@@ -82,6 +82,12 @@ Build frontend:
 npm run build
 ```
 
+Preview the production build locally:
+
+```bash
+npm run preview:static
+```
+
 ## Environment Variables
 
 Copy `.env.example` and configure deployment values.
