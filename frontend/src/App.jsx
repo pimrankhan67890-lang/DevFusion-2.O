@@ -21,6 +21,7 @@ import {
   Users,
   Zap
 } from "lucide-react";
+import { isStaticToken, staticRequest } from "./staticDemo.js";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
@@ -68,6 +69,10 @@ function authHeader(token) {
 }
 
 async function request(path, { token, method = "GET", body } = {}) {
+  if (isStaticToken(token)) {
+    return staticRequest(path, { method, body });
+  }
+
   const response = await fetch(`${API_URL}${path}`, {
     method,
     headers: {
@@ -103,7 +108,15 @@ function LoginScreen({ onLogin }) {
       });
       onLogin(payload);
     } catch (err) {
-      setError(err.message);
+      if (form.email === demoEmail && form.password === demoPassword) {
+        const payload = await staticRequest("/api/auth/login", {
+          method: "POST",
+          body: form
+        });
+        onLogin(payload);
+      } else {
+        setError(err.message);
+      }
     } finally {
       setBusy(false);
     }
@@ -223,6 +236,14 @@ function App() {
 
   useEffect(() => {
     if (!token || !selectedProjectId) return undefined;
+    if (isStaticToken(token)) {
+      const activeProject = data?.projects.find((item) => item.id === selectedProjectId);
+      const activeUsers = activeProject?.members
+        .map((id) => data.users.find((item) => item.id === id))
+        .filter(Boolean);
+      setPresence(activeUsers || []);
+      return undefined;
+    }
     const socket = io(API_URL, { auth: { token } });
     socket.emit("join-project", { projectId: selectedProjectId });
 

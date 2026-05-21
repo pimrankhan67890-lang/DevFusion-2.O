@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "vite build --base=/",
+    "build:pages": "vite build --base=/DevFusion-2.O/",
     "preview": "vite preview --host 0.0.0.0",
     "lint": "eslint src --ext js,jsx --max-warnings 0"
   },

@@ -4,8 +4,8 @@ DevCollab is a real-time project operating system for student developer teams, b
 
 ## Submission Links
 
-- Live frontend: _add Vercel URL after deployment_
-- Backend health: _add Render URL after deployment, ending with `/health`_
+- Live frontend: https://pimrankhan67890-lang.github.io/DevFusion-2.O/
+- Backend health: _optional Node backend deployment URL ending with `/health`_
 - Demo video: _add uploaded 3-5 minute demo video URL_
 - GitHub repository: _add public repository URL_
 
@@ -42,7 +42,7 @@ riya@devcollab.demo / DevCollab@123
 
 - Frontend: React, Vite, Tailwind CSS, lucide-react.
 - Backend: Node.js, Express, Socket.IO, JWT auth, bcrypt password hashing.
-- Data mode: seeded in-memory demo store for deterministic judging. The backend exposes a `/health` mode flag and includes a Mongoose dependency for a MongoDB-backed production extension.
+- Data mode: seeded in-memory backend store for deterministic judging, plus browser-only GitHub Pages demo mode so the free static live link remains functional without a Node server.
 - AI: deterministic demo-mode responses. This keeps the app fully functional without requiring a private API key during judging.
 - Deployment target: Vercel frontend and Render backend.
 
@@ -58,7 +58,7 @@ flowchart LR
   API --> Activity["Activity + Notifications"]
 ```
 
-Every project mutation writes an activity entry. Comments are scanned for mentions, and matching users receive notifications. Connected clients join `project:{projectId}` Socket.IO rooms to receive task, comment, activity, notification, and presence updates without refreshing.
+Every backend project mutation writes an activity entry. Comments are scanned for mentions, and matching users receive notifications. Connected clients join `project:{projectId}` Socket.IO rooms to receive task, comment, activity, notification, and presence updates without refreshing. On GitHub Pages, the same UI runs in browser-only demo mode because GitHub Pages hosts static files only.
 
 ## Local Setup
 
@@ -121,6 +121,18 @@ Optional production AI keys can be added later. The submitted MVP works without 
 - Output directory: `dist`
 - Required env var:
   - `VITE_API_URL=https://your-render-backend-url`
+
+### Free GitHub Pages Live Link
+
+This repository includes `.github/workflows/deploy-pages.yml`. After pushing to GitHub:
+
+1. Open repository Settings.
+2. Go to Pages.
+3. Set source to GitHub Actions.
+4. Run or wait for the `Deploy GitHub Pages` workflow.
+5. Live URL: `https://pimrankhan67890-lang.github.io/DevFusion-2.O/`
+
+GitHub Pages cannot run the Node/Socket.IO backend. The Pages deployment uses browser-only demo mode so judges can still test the product flow from the live link. For true multi-user realtime across devices, deploy `backend` on Render and set `VITE_API_URL` for a Vercel frontend.
 
 ## AI and Library Disclosure
 
