@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.local
+.DS_Store
+npm-debug.log*
+vite.err.log
+vite.out.log
+*.log
+backend/data/*.json
+!backend/data/.gitkeep

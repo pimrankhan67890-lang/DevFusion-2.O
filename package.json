@@ -1,0 +1,21 @@
+{
+  "name": "devcollab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DevCollab - Real-Time Project Collaboration Platform for Developers",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace backend\" \"npm run dev --workspace frontend\"",
+    "build": "npm run build --workspace frontend",
+    "start": "npm run start --workspace backend",
+    "preview:static": "node scripts/static-server.mjs",
+    "lint": "npm run lint --workspace frontend",
+    "test:smoke": "node scripts/smoke-test.mjs"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
