@@ -168,6 +168,7 @@ function LoginScreen({ onLogin }) {
           <label className="block text-sm font-bold text-slate-700">
             Email
             <input
+              autoComplete="username"
               className="mt-2 w-full rounded-2xl border border-line bg-slate-50 px-4 py-3 outline-none ring-teal-600 transition focus:ring-2"
               value={form.email}
               onChange={(event) => setForm({ ...form, email: event.target.value })}
@@ -177,6 +178,7 @@ function LoginScreen({ onLogin }) {
             Password
             <input
               type="password"
+              autoComplete="current-password"
               className="mt-2 w-full rounded-2xl border border-line bg-slate-50 px-4 py-3 outline-none ring-teal-600 transition focus:ring-2"
               value={form.password}
               onChange={(event) => setForm({ ...form, password: event.target.value })}
